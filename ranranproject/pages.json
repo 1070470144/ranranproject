@@ -7,9 +7,27 @@
 			}
 		},
 		{
+			"path": "pages/period/period",
+			"style": {
+				"navigationBarTitleText": "经期记录"
+			}
+		},
+		{
+			"path": "pages/wardrobe/wardrobe",
+			"style": {
+				"navigationBarTitleText": "我的衣柜"
+			}
+		},
+		{
 			"path": "pages/mine/mine",
 			"style": {
 				"navigationBarTitleText": "我的"
+			}
+		},
+		{
+			"path": "pages/mine/login",
+			"style": {
+				"navigationBarTitleText": "登录"
 			}
 		},
 		{

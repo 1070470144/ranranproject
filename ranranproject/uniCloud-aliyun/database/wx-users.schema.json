@@ -23,6 +23,10 @@
 			"bsonType": "string",
 			"description": "Avatar fileID or image URL"
 		},
+		"wardrobe_name": {
+			"bsonType": "string",
+			"description": "Custom wardrobe display name"
+		},
 		"created_at": {
 			"bsonType": "timestamp",
 			"description": "Created time"

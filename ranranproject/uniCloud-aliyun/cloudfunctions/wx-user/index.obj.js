@@ -15,6 +15,7 @@ function normalizeProfile(user) {
 		openId: user.openid,
 		nickname: user.nickname || '',
 		avatarUrl: user.avatar_url || '',
+		wardrobeName: user.wardrobe_name || '',
 		createdAt: user.created_at || null,
 		updatedAt: user.updated_at || null
 	}
@@ -70,6 +71,7 @@ module.exports = {
 					openid,
 					nickname: '',
 					avatar_url: '',
+					wardrobe_name: '',
 					created_at: now,
 					updated_at: now
 				}
@@ -91,6 +93,7 @@ module.exports = {
 		const openid = params.openId
 		const nickname = (params.nickname || '').trim()
 		const avatarUrl = params.avatarUrl || ''
+		const wardrobeName = (params.wardrobeName || '').trim()
 
 		if (!openid) {
 			return { errCode: 400, errMsg: '缺少 openId' }
@@ -103,6 +106,7 @@ module.exports = {
 			const payload = {
 				nickname,
 				avatar_url: avatarUrl,
+				wardrobe_name: wardrobeName,
 				updated_at: now
 			}
 

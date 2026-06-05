@@ -1,0 +1,26 @@
+{
+	"bsonType": "object",
+	"required": ["openid", "name"],
+	"permission": {
+		"read": false,
+		"create": false,
+		"update": false,
+		"delete": false
+	},
+	"properties": {
+		"_id": { "description": "Auto generated ID" },
+		"openid": { "bsonType": "string", "description": "Owner openid" },
+		"name": { "bsonType": "string", "description": "Item name" },
+		"category": { "bsonType": "string", "description": "Item category" },
+		"color": { "bsonType": "string", "description": "Item color" },
+		"brand": { "bsonType": "string", "description": "Brand" },
+		"price": { "bsonType": "string", "description": "Price" },
+		"buy_date": { "bsonType": "string", "description": "Buy date" },
+		"note": { "bsonType": "string", "description": "Note" },
+		"original_images": { "bsonType": "array", "description": "Original product image fileIDs" },
+		"wear_images": { "bsonType": "array", "description": "Wearing photo fileIDs" },
+		"is_shared": { "bsonType": "bool", "description": "Share enabled" },
+		"created_at": { "bsonType": "timestamp", "description": "Created time" },
+		"updated_at": { "bsonType": "timestamp", "description": "Updated time" }
+	}
+}

@@ -34,6 +34,10 @@
 				<text class="field-label">名字</text>
 				<input class="field-input" type="nickname" v-model="form.nickname" placeholder="请输入名字" placeholder-class="placeholder" />
 			</view>
+			<view class="field">
+				<text class="field-label">衣柜</text>
+				<input class="field-input" v-model="form.wardrobeName" placeholder="请输入衣柜名称" placeholder-class="placeholder" />
+			</view>
 		</view>
 
 		<button class="save-button" :loading="saveLoading" :disabled="saveLoading" @tap="saveProfile">
@@ -53,7 +57,8 @@
 				tempAvatarPath: '',
 				saveLoading: false,
 				form: {
-					nickname: ''
+					nickname: '',
+					wardrobeName: ''
 				}
 			}
 		},
@@ -71,12 +76,14 @@
 				this.openId = profile.openId || ''
 				this.avatarUrl = profile.avatarUrl || ''
 				this.form.nickname = profile.nickname || ''
+				this.form.wardrobeName = profile.wardrobeName || ''
 			},
 			saveLocalProfile(profile) {
 				uni.setStorageSync('wxUserProfile', profile)
 				this.openId = profile.openId || ''
 				this.avatarUrl = profile.avatarUrl || ''
 				this.form.nickname = profile.nickname || ''
+				this.form.wardrobeName = profile.wardrobeName || ''
 			},
 			onChooseWeixinAvatar(event) {
 				const avatarUrl = event.detail.avatarUrl
@@ -127,6 +134,7 @@
 					const res = await wxUser.updateProfile({
 						openId: this.openId,
 						nickname: this.form.nickname,
+						wardrobeName: this.form.wardrobeName,
 						avatarUrl
 					})
 					if (res.errCode) {
