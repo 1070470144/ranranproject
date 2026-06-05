@@ -12,6 +12,7 @@
 		"openid": { "bsonType": "string", "description": "Owner openid" },
 		"name": { "bsonType": "string", "description": "Item name" },
 		"category": { "bsonType": "string", "description": "Item category" },
+		"size": { "bsonType": "string", "description": "Item size" },
 		"color": { "bsonType": "string", "description": "Item color" },
 		"brand": { "bsonType": "string", "description": "Brand" },
 		"price": { "bsonType": "string", "description": "Price" },

@@ -48,10 +48,35 @@
 					</view>
 					<text v-if="!sharedItemId" class="edit-action" @tap="startEdit(currentItem)">编辑</text>
 				</view>
-				<view class="meta-row">
-					<text>{{ currentItem.category || '未分类' }}</text>
-					<text>{{ currentItem.color || '未设置颜色' }}</text>
-					<text>{{ currentItem.brand || '未设置品牌' }}</text>
+				<view class="detail-info">
+					<view class="info-row">
+						<text class="info-label">类型：</text>
+						<text class="info-value">{{ currentItem.category || '未填写' }}</text>
+					</view>
+					<view class="info-row">
+						<text class="info-label">品牌：</text>
+						<text class="info-value">{{ currentItem.brand || '未填写' }}</text>
+					</view>
+					<view class="info-row">
+						<text class="info-label">尺码：</text>
+						<text class="info-value">{{ currentItem.size || '未填写' }}</text>
+					</view>
+					<view class="info-row">
+						<text class="info-label">颜色：</text>
+						<text class="info-value">{{ currentItem.color || '未填写' }}</text>
+					</view>
+					<view class="info-row">
+						<text class="info-label">价格：</text>
+						<text class="info-value">{{ formatPrice(currentItem.price) }}</text>
+					</view>
+					<view class="info-row">
+						<text class="info-label">入手日期：</text>
+						<text class="info-value">{{ currentItem.buyDate || '未填写' }}</text>
+					</view>
+					<view class="info-row note-row">
+						<text class="info-label">备注：</text>
+						<text class="info-value">{{ currentItem.note || '未填写' }}</text>
+					</view>
 				</view>
 			</view>
 
@@ -87,12 +112,13 @@
 				<input class="input" v-model="form.name" placeholder="裙子名称" placeholder-class="placeholder" />
 				<view class="grid">
 					<input class="input" v-model="form.category" placeholder="类型，如连衣裙" placeholder-class="placeholder" />
-					<input class="input" v-model="form.price" type="digit" placeholder="价格" placeholder-class="placeholder" />
+					<input class="input" v-model="form.size" placeholder="尺码，如 S / M" placeholder-class="placeholder" />
 				</view>
 				<view class="grid">
 					<input class="input" v-model="form.color" placeholder="颜色" placeholder-class="placeholder" />
 					<input class="input" v-model="form.brand" placeholder="品牌" placeholder-class="placeholder" />
 				</view>
+				<input class="input" v-model="form.price" type="digit" placeholder="价格" placeholder-class="placeholder" />
 				<picker mode="date" :value="form.buyDate" @change="onBuyDateChange">
 					<view class="date-row">
 						<text>入手日期</text>
@@ -196,6 +222,7 @@
 				return {
 					name: '',
 					category: '',
+					size: '',
 					color: '',
 					brand: '',
 					price: '',
@@ -267,6 +294,7 @@
 				this.form = {
 					name: item.name || '',
 					category: item.category || '',
+					size: item.size || '',
 					color: item.color || '',
 					brand: item.brand || '',
 					price: item.price || '',
@@ -494,7 +522,6 @@
 	.detail-head,
 	.form-head,
 	.section-head,
-	.meta-row,
 	.upload-head,
 	.date-row,
 	.button-row {
@@ -565,6 +592,7 @@
 
 	.closet-card {
 		position: relative;
+		height: 336rpx;
 		border-radius: 18rpx;
 		background: #ffffff;
 		box-shadow: 0 12rpx 26rpx rgba(222, 158, 176, 0.13);
@@ -573,7 +601,7 @@
 
 	.closet-cover {
 		width: 100%;
-		aspect-ratio: 1;
+		height: 236rpx;
 		background: #fff2f8;
 	}
 
@@ -603,7 +631,9 @@
 	}
 
 	.card-info {
-		padding: 16rpx 16rpx 18rpx;
+		height: 100rpx;
+		padding: 14rpx 16rpx 16rpx;
+		box-sizing: border-box;
 	}
 
 	.item-name {
@@ -617,10 +647,14 @@
 	}
 
 	.item-price {
-		margin-top: 8rpx;
+		margin-top: 6rpx;
 		font-size: 22rpx;
+		line-height: 28rpx;
 		font-weight: 900;
 		color: #ff7fa6;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
 	}
 
 	.empty-state {
@@ -718,19 +752,42 @@
 		color: #ff7fa6;
 	}
 
-	.meta-row {
-		margin-top: 18rpx;
-		gap: 12rpx;
-		flex-wrap: wrap;
+	.detail-info {
+		margin-top: 24rpx;
+		padding: 18rpx 20rpx;
+		border-radius: 18rpx;
+		background: #fff7fb;
 	}
 
-	.meta-row text {
-		padding: 10rpx 16rpx;
-		border-radius: 999rpx;
-		background: #fff2f8;
-		font-size: 22rpx;
-		font-weight: 800;
+	.info-row {
+		min-height: 46rpx;
+		display: flex;
+		align-items: flex-start;
+		font-size: 25rpx;
+		line-height: 34rpx;
+	}
+
+	.info-row + .info-row {
+		margin-top: 10rpx;
+	}
+
+	.info-label {
+		width: 132rpx;
+		flex-shrink: 0;
+		font-weight: 900;
 		color: #b15b84;
+	}
+
+	.info-value {
+		flex: 1;
+		min-width: 0;
+		font-weight: 800;
+		color: #20232b;
+		word-break: break-all;
+	}
+
+	.note-row .info-value {
+		line-height: 36rpx;
 	}
 
 	.image-section,
@@ -878,5 +935,19 @@
 	.danger-button::after,
 	.save-button::after {
 		border: none;
+	}
+
+	@media screen and (max-width: 360px) {
+		.item-grid {
+			gap: 18rpx;
+		}
+
+		.closet-card {
+			height: 312rpx;
+		}
+
+		.closet-cover {
+			height: 214rpx;
+		}
 	}
 </style>

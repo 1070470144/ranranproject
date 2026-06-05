@@ -24,13 +24,14 @@
 				<text class="empty-desc">点击右上角新增，默认会选中今天。</text>
 			</view>
 
-			<view v-for="item in list" :key="item.id" class="record">
+			<view v-for="(item, index) in list" :key="item.id" class="record">
 				<view class="record-date">
 					<text class="record-day">{{ getDay(item.startDate) }}</text>
 					<text class="record-month">{{ getMonth(item.startDate) }}月</text>
 				</view>
 				<view class="record-main">
 					<text class="record-title">{{ formatDateRange(item) }}</text>
+					<text class="record-interval">{{ formatPeriodInterval(index) }}</text>
 					<text class="record-desc">{{ formatRecordDesc(item) }}</text>
 				</view>
 				<view class="record-actions">
@@ -317,6 +318,16 @@
 				const parts = [item.flow, item.pain, item.mood, item.note].filter(Boolean)
 				return parts.length ? parts.join(' · ') : '没有备注'
 			},
+			formatPeriodInterval(index) {
+				if (index >= this.list.length - 1) return '姨妈间隔：暂无上次记录'
+
+				const current = parseDate(this.list[index] && this.list[index].startDate)
+				const previous = parseDate(this.list[index + 1] && this.list[index + 1].startDate)
+				if (!current || !previous) return '姨妈间隔：暂无数据'
+
+				const days = Math.round((current.getTime() - previous.getTime()) / 86400000)
+				return days > 0 ? `姨妈间隔：${days} 天` : '姨妈间隔：日期待确认'
+			},
 			hasRecord(date) {
 				return this.list.some((item) => item.startDate === date && item.id !== this.editingId)
 			},
@@ -584,6 +595,15 @@
 		overflow: hidden;
 		text-overflow: ellipsis;
 		white-space: nowrap;
+	}
+
+	.record-interval {
+		display: block;
+		margin-top: 8rpx;
+		font-size: 22rpx;
+		line-height: 28rpx;
+		font-weight: 800;
+		color: #ff7fa6;
 	}
 
 	.record-actions {

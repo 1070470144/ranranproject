@@ -79,6 +79,7 @@ function normalizeWardrobeItem(item) {
 		openId: item.openid,
 		name: item.name || '',
 		category: item.category || '',
+		size: item.size || '',
 		color: item.color || '',
 		brand: item.brand || '',
 		price: item.price || '',
@@ -102,14 +103,12 @@ module.exports = {
 			const wardrobeRes = await wardrobe.where({ openid: openId }).orderBy('created_at', 'desc').limit(4).get()
 			const allWardrobeRes = await wardrobe.where({ openid: openId }).count()
 			const latestPeriod = periodRes.data[0] ? normalizePeriod(periodRes.data[0]) : null
-			const periodForecast = calculatePeriodForecast(periodRes.data)
 
 			return {
 				errCode: 0,
 				periodCount: periodRes.data.length,
 				wardrobeCount: allWardrobeRes.total,
 				latestPeriod,
-				periodForecast,
 				recentWardrobe: wardrobeRes.data.map(normalizeWardrobeItem)
 			}
 		} catch (err) {
@@ -267,6 +266,7 @@ module.exports = {
 				openid: openId,
 				name: params.name,
 				category: params.category || '',
+				size: params.size || '',
 				color: params.color || '',
 				brand: params.brand || '',
 				price: params.price || '',
@@ -305,6 +305,7 @@ module.exports = {
 			await wardrobe.doc(params.id).update({
 				name: params.name,
 				category: params.category || '',
+				size: params.size || '',
 				color: params.color || '',
 				brand: params.brand || '',
 				price: params.price || '',

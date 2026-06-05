@@ -15,8 +15,8 @@
 				<view class="predict-card" @tap="goPeriod">
 					<view class="predict-icon">滴</view>
 					<view class="predict-copy">
-						<text class="predict-title">经期预测</text>
-						<text class="predict-desc">{{ periodForecastText }}</text>
+						<text class="predict-title">经期记录</text>
+						<text class="predict-desc">{{ periodRecordText }}</text>
 					</view>
 					<text class="arrow">›</text>
 				</view>
@@ -69,7 +69,6 @@
 			return {
 				openId: '',
 				latestPeriod: null,
-				periodForecast: null,
 				periodCount: 0,
 				wardrobeCount: 0,
 				recentWardrobe: [],
@@ -85,16 +84,11 @@
 				const weekMap = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六']
 				return `${date.getMonth() + 1}月${date.getDate()}日 ${weekMap[date.getDay()]}`
 			},
-			periodForecastText() {
-				if (!this.openId) return '登录后查看你的经期预测'
-				if (!this.periodForecast) return '添加第一条记录后开始预测'
-				if (this.periodForecast.isCurrentPeriod) return '当前经期正在记录中'
-
-				const days = this.periodForecast.daysToNextPeriod
-				if (days === null || days === undefined) return '最近开始日期待完善'
-				if (days <= 0) return '预计经期已到, 记得更新记录'
-				const basisText = this.periodForecast.basisCount ? `按${this.periodForecast.cycleDays}天周期预估` : '按默认28天预估'
-				return `距离下次姨妈还有 ${days} 天 · ${basisText}`
+			periodRecordText() {
+				if (!this.openId) return '登录后记录每一次经期'
+				if (!this.periodCount) return '添加第一条经期记录'
+				if (this.latestPeriod && !this.latestPeriod.endDate) return `当前记录开始于 ${this.latestPeriod.startDate}`
+				return `已记录 ${this.periodCount} 条经期信息`
 			},
 			wardrobeMetaText() {
 				return `${this.wardrobeCount || 0}件藏品`
@@ -114,7 +108,6 @@
 				this.wardrobeName = profile.wardrobeName || '我的衣柜'
 				if (!this.openId) {
 					this.latestPeriod = null
-					this.periodForecast = null
 					this.periodCount = 0
 					this.wardrobeCount = 0
 					this.recentWardrobe = []
@@ -127,7 +120,6 @@
 					return
 				}
 				this.latestPeriod = res.latestPeriod
-				this.periodForecast = res.periodForecast || null
 				this.periodCount = res.periodCount || 0
 				this.wardrobeCount = res.wardrobeCount || 0
 				this.recentWardrobe = res.recentWardrobe || []
