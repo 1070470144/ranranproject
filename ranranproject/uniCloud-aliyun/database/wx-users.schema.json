@@ -1,0 +1,35 @@
+{
+	"bsonType": "object",
+	"required": ["openid"],
+	"permission": {
+		"read": false,
+		"create": false,
+		"update": false,
+		"delete": false
+	},
+	"properties": {
+		"_id": {
+			"description": "Auto generated ID"
+		},
+		"openid": {
+			"bsonType": "string",
+			"description": "Weixin mini program openid"
+		},
+		"nickname": {
+			"bsonType": "string",
+			"description": "User nickname"
+		},
+		"avatar_url": {
+			"bsonType": "string",
+			"description": "Avatar fileID or image URL"
+		},
+		"created_at": {
+			"bsonType": "timestamp",
+			"description": "Created time"
+		},
+		"updated_at": {
+			"bsonType": "timestamp",
+			"description": "Updated time"
+		}
+	}
+}
