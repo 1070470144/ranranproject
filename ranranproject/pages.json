@@ -19,6 +19,12 @@
 			}
 		},
 		{
+			"path": "pages/tarot/tarot",
+			"style": {
+				"navigationBarTitleText": "心事卡牌"
+			}
+		},
+		{
 			"path": "pages/mine/mine",
 			"style": {
 				"navigationBarTitleText": "我的"
@@ -34,6 +40,12 @@
 			"path": "pages/mine/settings",
 			"style": {
 				"navigationBarTitleText": "设置"
+			}
+		},
+		{
+			"path": "pages/mine/ai-config",
+			"style": {
+				"navigationBarTitleText": "AI配置"
 			}
 		}
 	],

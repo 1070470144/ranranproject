@@ -35,16 +35,11 @@
 				<text class="feature-meta">{{ wardrobeMetaText }}</text>
 			</view>
 
-			<view class="feature-card muted" @tap="showComingSoon('美丽账单')">
-				<view class="feature-icon bill-icon">卡</view>
-				<text class="feature-title muted-title">美丽账单</text>
-				<text class="feature-meta">即将上线</text>
+			<view class="feature-card" @tap="goTarot">
+				<view class="feature-icon tarot-icon">塔</view>
+				<text class="feature-title">心事卡牌</text>
+				<text class="feature-meta">抽一份温柔提醒</text>
 			</view>
-		</view>
-
-		<view class="wide-card" @tap="showComingSoon('日常打卡')">
-			<view class="check-icon">✓</view>
-			<text class="wide-title">日常打卡</text>
 		</view>
 
 		<view class="bottom-shell">
@@ -130,6 +125,9 @@
 			goWardrobe() {
 				this.goAuthPage('/pages/wardrobe/wardrobe')
 			},
+			goTarot() {
+				this.goAuthPage('/pages/tarot/tarot')
+			},
 			goMine() {
 				uni.switchTab({ url: '/pages/mine/mine' })
 			},
@@ -139,9 +137,6 @@
 					return
 				}
 				uni.navigateTo({ url })
-			},
-			showComingSoon(name) {
-				uni.showToast({ title: `${name}即将上线`, icon: 'none' })
 			}
 		}
 	}
@@ -196,8 +191,7 @@
 	.predict-title,
 	.predict-desc,
 	.feature-title,
-	.feature-meta,
-	.wide-title,
+		.feature-meta,
 	.tab-icon,
 	.tab-text {
 		display: block;
@@ -325,8 +319,7 @@
 		background: rgba(255, 255, 255, 0.78);
 	}
 
-	.feature-icon,
-	.check-icon {
+	.feature-icon {
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -345,9 +338,9 @@
 		color: #ff7fa6;
 	}
 
-	.bill-icon {
-		background: #f5f6f8;
-		color: #aeb4bf;
+	.tarot-icon {
+		background: #fff0f6;
+		color: #ff5fa2;
 	}
 
 	.feature-title {
@@ -367,34 +360,6 @@
 		font-size: 19rpx;
 		line-height: 26rpx;
 		color: #a2a6ad;
-	}
-
-	.wide-card {
-		margin-top: 26rpx;
-		height: 168rpx;
-		border-radius: 18rpx;
-		background: rgba(255, 255, 255, 0.86);
-		box-shadow: 0 16rpx 34rpx rgba(210, 154, 170, 0.12);
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
-	}
-
-	.check-icon {
-		width: 42rpx;
-		height: 42rpx;
-		background: #d7dce4;
-		font-size: 24rpx;
-		color: #ffffff;
-	}
-
-	.wide-title {
-		margin-top: 20rpx;
-		font-size: 26rpx;
-		line-height: 34rpx;
-		font-weight: 900;
-		color: #555963;
 	}
 
 	.bottom-shell {

@@ -1,0 +1,20 @@
+{
+	"bsonType": "object",
+	"required": ["openid", "api_key"],
+	"permission": {
+		"read": false,
+		"create": false,
+		"update": false,
+		"delete": false
+	},
+	"properties": {
+		"_id": { "description": "Auto generated ID" },
+		"openid": { "bsonType": "string", "description": "Owner openid" },
+		"api_key": { "bsonType": "string", "description": "DeepSeek API key" },
+		"model": { "bsonType": "string", "description": "DeepSeek model" },
+		"base_url": { "bsonType": "string", "description": "DeepSeek base URL" },
+		"system_prompt": { "bsonType": "string", "description": "System prompt for tarot reading" },
+		"created_at": { "bsonType": "timestamp", "description": "Created time" },
+		"updated_at": { "bsonType": "timestamp", "description": "Updated time" }
+	}
+}

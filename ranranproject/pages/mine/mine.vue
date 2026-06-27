@@ -14,9 +14,14 @@
 
 		<text class="section-title">服务与设置</text>
 		<view class="menu-card">
-			<view class="menu-row last" @tap="goSettings">
+			<view class="menu-row" @tap="goSettings">
 				<view class="menu-icon pink">设</view>
 				<text class="menu-title">个人设置</text>
+				<text class="arrow small">›</text>
+			</view>
+			<view class="menu-row last" @tap="goAiConfig">
+				<view class="menu-icon soft">AI</view>
+				<text class="menu-title">AI配置</text>
 				<text class="arrow small">›</text>
 			</view>
 		</view>
@@ -65,6 +70,13 @@
 					return
 				}
 				uni.navigateTo({ url: '/pages/mine/settings' })
+			},
+			goAiConfig() {
+				if (!this.isLogin) {
+					uni.navigateTo({ url: '/pages/mine/login' })
+					return
+				}
+				uni.navigateTo({ url: '/pages/mine/ai-config' })
 			},
 			logout() {
 				uni.removeStorageSync('wxUserProfile')
@@ -194,6 +206,11 @@
 	.menu-icon.pink {
 		background: #fff1f7;
 		color: #ff5fa2;
+	}
+
+	.menu-icon.soft {
+		background: #f4ecf2;
+		color: #a56a87;
 	}
 
 	.menu-title {

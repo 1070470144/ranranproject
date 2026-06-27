@@ -1,0 +1,19 @@
+{
+	"bsonType": "object",
+	"required": ["openid", "question", "cards"],
+	"permission": {
+		"read": false,
+		"create": false,
+		"update": false,
+		"delete": false
+	},
+	"properties": {
+		"_id": { "description": "Auto generated ID" },
+		"openid": { "bsonType": "string", "description": "Owner openid" },
+		"question": { "bsonType": "string", "description": "User question" },
+		"spread": { "bsonType": "string", "description": "Tarot spread" },
+		"cards": { "bsonType": "array", "description": "Drawn cards" },
+		"answer": { "bsonType": "string", "description": "AI tarot answer" },
+		"created_at": { "bsonType": "timestamp", "description": "Created time" }
+	}
+}
